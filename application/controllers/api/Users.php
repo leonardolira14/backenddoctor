@@ -8,6 +8,9 @@ require APPPATH . '/libraries/REST_Controller.php';
 class Users extends REST_Controller
 {
     public function __construct() {
+        header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
+    	header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+    	header("Access-Control-Allow-Origin: *");
         parent::__construct();
         // Load User Model
         $this->load->model('Model_User','User_Model');
@@ -28,7 +31,7 @@ class Users extends REST_Controller
      */
     public function register_post()
     {
-        header("Access-Control-Allow-Origin: *");
+        
 
         # XSS Filtering (https://www.codeigniter.com/user_guide/libraries/security.html)
         $_POST = $this->security->xss_clean($_POST);
