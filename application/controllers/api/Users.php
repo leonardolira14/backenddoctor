@@ -10,7 +10,7 @@ class Users extends REST_Controller
     public function __construct() {
         parent::__construct();
         // Load User Model
-        $this->load->model('user_model')
+        $this->load->model('user_model');
         $this->load->model('doctor_model');
         $this->load->library('Authorization_Token');
     }
