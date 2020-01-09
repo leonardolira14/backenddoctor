@@ -10,8 +10,8 @@ class Users extends REST_Controller
     public function __construct() {
         parent::__construct();
         // Load User Model
-        $this->load->model('User_model');
-        $this->load->model('Doctor_model');
+        $this->load->model('User_Model');
+        $this->load->model('Doctor_Model');
         $this->load->library('Authorization_Token');
     }
 
@@ -65,7 +65,7 @@ class Users extends REST_Controller
             ];
 
             // Insert User in Database
-            $output = $this->User_model->insert_user($insert_data);
+            $output = $this->User_Model->insert_user($insert_data);
             if ($output > 0 AND !empty($output))
             {
                 // Success 200 Code Send
@@ -130,12 +130,12 @@ class Users extends REST_Controller
         else
         {
             // Load Login Function
-            $output = $this->User_model->user_login($this->input->post('username'), $this->input->post('password'));
+            $output = $this->User_Model->user_login($this->input->post('username'), $this->input->post('password'));
             
             if (!empty($output) AND $output != FALSE)
             {
                 if($output->Tipo==='1'){
-                    $data_user=$this->Doctor_model->getdata($output->IDUsuario);  
+                    $data_user=$this->Doctor_Model->getdata($output->IDUsuario);  
                 }
                 
                 // Load Authorization Token Library

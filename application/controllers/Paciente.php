@@ -15,8 +15,8 @@ class Paciente extends REST_Controller
     	header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     	header("Access-Control-Allow-Origin: *");
         // Load User Model
-        $this->load->model('doctor_model', 'DoctorModel');
-        $this->load->model('paciente_model', 'PacienteModel');
+        $this->load->model('Doctor_Model', 'DoctorModel');
+        $this->load->model('Paciente_Model', 'PacienteModel');
         $this->load->library('Authorization_Token');
          
         if(!isset($this->authorization_token->userData()->ID_Usuario)){
