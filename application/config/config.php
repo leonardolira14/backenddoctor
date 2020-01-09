@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/crmdoc/web/backend/';
-$config['base_url'] = 'https://serverdoctor.admyo.com/';
+$config['base_url'] = 'https://doctor.admyo.com/backend/';
 /*
 |--------------------------------------------------------------------------
 | Index File
