@@ -11,7 +11,7 @@ class Users extends REST_Controller
         parent::__construct();
         // Load User Model
         $this->load->model('Model_User','User_Model');
-        $this->load->model('Doctor_Model');
+        $this->load->model('Model_Doctor','Doctor_Model');
         $this->load->library('Authorization_Token');
     }
 
