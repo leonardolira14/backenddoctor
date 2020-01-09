@@ -27,7 +27,7 @@ $db['defaultt'] = array(
 	'save_queries' => TRUE
 );
 
-$db['defaultl'] = array(
+$db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'ec2-18-188-195-242.us-east-2.compute.amazonaws.com',
 	'username' => 'root',
