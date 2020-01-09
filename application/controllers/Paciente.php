@@ -15,8 +15,8 @@ class Paciente extends REST_Controller
     	header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     	header("Access-Control-Allow-Origin: *");
         // Load User Model
-        $this->load->model('Doctor_Model', 'DoctorModel');
-        $this->load->model('Paciente_Model', 'PacienteModel');
+        $this->load->model('Model_Doctor');
+        $this->load->model('Model_Paciente');
         $this->load->library('Authorization_Token');
          
         if(!isset($this->authorization_token->userData()->ID_Usuario)){
@@ -46,7 +46,7 @@ class Paciente extends REST_Controller
         
        
         // primero insertamos los datos principales para obtebner el id
-        $_ID_Paciente=$this->PacienteModel->save_data(
+        $_ID_Paciente=$this->Model_Paciente->save_data(
             $_POST["Nombre"],
             $_POST["ApellidoMaterno"],
             $_POST["ApellidoPaterno"],
@@ -62,7 +62,7 @@ class Paciente extends REST_Controller
         );
         
         // ahora guardo la direccion del paciente
-        $output=$this->PacienteModel->save_direccion(
+        $output=$this->Model_Paciente->save_direccion(
         $_ID_Paciente,
         $_POST["Calle"],
         $_POST["Colonia"],
@@ -71,7 +71,7 @@ class Paciente extends REST_Controller
         $_POST["Codigo_Postal"]
         );
             // ahora guardo la direccion del paciente
-        $output = $this->PacienteModel->save_data_emergencias(
+        $output = $this->Model_Paciente->save_data_emergencias(
         $_ID_Paciente,
         $_POST["Nombre_Emergecia"],
         $_POST["Apellidos_Emergecia"],
@@ -119,7 +119,7 @@ class Paciente extends REST_Controller
 						$this->response($message, REST_Controller::HTTP_NOT_FOUND);
 					}	
                     // Success 200 Code Send
-                    $this->PacienteModel->update_foto($datos["IDPaciente"],$nombreactual);
+                    $this->Model_Paciente->update_foto($datos["IDPaciente"],$nombreactual);
                     $message = [
                         'status' => true,
                         'message' => "Exito",
@@ -141,7 +141,7 @@ class Paciente extends REST_Controller
 
     // funcion para obtener todos los pacientes registrados
     public function getall_get(){
-     $lista_pacientes=$this->PacienteModel->getall(); 
+     $lista_pacientes=$this->Model_Paciente->getall(); 
     $message = [
                 'status' => true,
                 'message' => $lista_pacientes,
