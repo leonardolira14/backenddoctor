@@ -29,7 +29,7 @@ class Model_Doctor extends CI_Model
      */
     public function getdata($_ID){
         $this->db->where('IDDatos_Doc', $_ID);
-        $q = $this->db->get($this->user_table);
+        $q = $this->db->get($this->doctor_table);
        if( $q->num_rows() ) 
         {
          return $q->row_array();
