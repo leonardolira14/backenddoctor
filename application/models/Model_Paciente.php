@@ -245,4 +245,54 @@ class Model_Paciente extends CI_Model
         return $this->db->where("IDPaciente='$_ID_Paciente'")->update($this->paciente_table,$status);
     }
 
+    // busqueda 
+    public function busqueda($_Palabra){
+
+       	//primero por nombre
+		$_ResultadosN=$this->db->query("SELECT IDPaciente FROM  paciente WHERE Nombre LIKE '%$_Palabra%'");
+        $_ResultadosN=$_ResultadosN->result_array();
+        
+        // por apellido paterno
+		$_ResultadosAP=$this->db->query("SELECT IDPaciente  FROM  paciente WHERE Apellido_Pat LIKE '%$_Palabra%'");
+        $_ResultadosAP=$_ResultadosAP->result_array();
+        
+        // por  apellido materno
+		$_ResultadosAM=$this->db->query("SELECT IDPaciente  FROM  paciente WHERE Apellido_Mat LIKE '%$_Palabra%'");
+        $_ResultadosAM=$_ResultadosAM->result_array();
+        
+        // por especialidad
+		$_ResultadosE=$this->db->query("SELECT IDPaciente  FROM  paciente WHERE Curp LIKE '%$_Palabra%'");
+        $_ResultadosE=$_ResultadosE->result_array();
+       
+
+        $todos=array_merge($_ResultadosN, $_ResultadosAP,$_ResultadosAM,$_ResultadosE);
+		
+        $_Resultados=[];
+        
+        //ahora elimino los repetidos
+		foreach($todos as $empresa){
+			$bandera=false;
+			$resulta=in_array_r($empresa["IDPaciente"],$_Resultados);
+			if($resulta===false){
+				array_push($_Resultados,array("IDPaciente"=>$empresa["IDPaciente"]));
+			}			
+		}
+       $_Datos=[];
+        foreach($_Resultados as $_Paciente){
+		    $_DatosPaciente=$this->getdata_by_ID($_Paciente["IDPaciente"]);
+            array_push($_Datos,array(
+                "IDPaciente"=>$_DatosPaciente["IDPaciente"],
+                "Nombre"=>$_DatosPaciente["Nombre"],
+                "Apellido_Pat"=>$_DatosPaciente["Apellido_Pat"],
+                "Apellido_Mat"=>$_DatosPaciente["Apellido_Mat"],
+                "Movil"=>$_DatosPaciente["Movil"],
+                "Edad"=>$_DatosPaciente["Edad"],
+                "Sexo"=>$_DatosPaciente["Sexo"],
+                "Foto"=>$_DatosPaciente["Foto"],
+                "Discapacitado"=>$_DatosPaciente["Discapacitado"],
+                "Status"=>$_DatosPaciente["Status"]
+            ));			
+        }
+        return $_Datos;
+    }
 }

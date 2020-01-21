@@ -52,7 +52,7 @@ class Model_User extends CI_Model
             "Tipo"=>$_Tipo,
             "IDPersona"=>$_ID
         );
-        $this->db->insert('Usuario', $array);
+        $this->db->insert('Usuarios', $array);
     }
   
 }

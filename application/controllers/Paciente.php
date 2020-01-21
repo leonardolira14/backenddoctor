@@ -35,6 +35,8 @@ class Paciente extends REST_Controller
      * @param: IDPaciente
      */
     public function getdata_post(){
+         $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
          $datos=$this->post();
          $data["datos_paciente"]=$this->Model_Paciente->getdata_by_ID($datos["IDPaciente"]);
          $data["direccion_paciente"]=$this->Model_Paciente->getdress_by_ID($datos["IDPaciente"]);
@@ -187,8 +189,6 @@ class Paciente extends REST_Controller
     public function updatedatap_post(){        
 	    $_POST = json_decode(file_get_contents("php://input"), true);
         $_POST = $this->security->xss_clean($_POST);
-      
-
         if($_POST["Discapacidad"]==='1'){
             $Discapacidad = '1'; 
        }else{
@@ -288,6 +288,21 @@ class Paciente extends REST_Controller
                 ];
                 $this->response($message, REST_Controller::HTTP_NOT_FOUND);
             }
+    }
+
+     //funcion para cambiar el status de un doctor
+    public function busqueda_post(){
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos=$this->post();
+        $_data=$this->Model_Paciente->busqueda($datos["palabra"]);
+        $message = [
+                        'status' => true,
+                        'message' => "Exito",
+                        'data'=>$_data
+
+                    ];
+		$this->response($message, REST_Controller::HTTP_OK);
     }
 
     
