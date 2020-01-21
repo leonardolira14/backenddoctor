@@ -23,12 +23,12 @@ $route['getdatadoctor']="doctor/getdata";
 $route['updatedatadoctor']="doctor/update";
 $route['busquedadoctor']="doctor/busqueda";
 
-$route['saveunidadmedica']="UnidadMedica/save";
-$route['updateunidadmedica']="UnidadMedica/update";
-$route['getdataunidadmedica']="UnidadMedica/getData";
-$route['getallunidadmedica']="UnidadMedica/getall";
-$route['searchunidadmedica']="UnidadMedica/busqueda";
-$route['bajaunidad']="UnidadMedica/bajaunidad";
+$route['saveunidadmedica']="Unidadmedica/save";
+$route['updateunidadmedica']="Unidadmedica/update";
+$route['getdataunidadmedica']="Unidadmedica/getData";
+$route['getallunidadmedica']="Unidadmedica/getall";
+$route['searchunidadmedica']="Unidadmedica/busqueda";
+$route['bajaunidad']="Unidadmedica/bajaunidad";
 
 
 $route['saveadministrativo']="administrativo/save";
