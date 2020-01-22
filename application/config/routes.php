@@ -31,12 +31,12 @@ $route['searchunidadmedica']="Unidadmedica/busqueda";
 $route['bajaunidad']="Unidadmedica/bajaunidad";
 
 
-$route['saveadministrativo']="administrativo/save";
+$route['saveadministrativo']="administrativo/savedata";
 $route['updateadministrativo']="administrativo/update";
 $route['getdataadministrativo']="administrativo/getData";
 $route['getalladministrativo']="administrativo/getDataAll";
 $route['searchadministrativo']="administrativo/busqueda";
 $route['updatefotoadministrativo']= 'administrativo/changefoto';
-$route['bajaadministrativo']="administrativo/bajaa";
+$route['bajaadministrativo']="administrativo/baja";
 
 $route['pruebatoke'] = 'api/users/prueba';

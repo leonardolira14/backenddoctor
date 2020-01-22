@@ -16,6 +16,7 @@ class Administrativo extends REST_Controller
     	header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     	header("Access-Control-Allow-Origin: *");
         // Load User Model
+        $this->load->model('Model_User');
         $this->load->model('Model_Administrativo');
         $this->load->library('Authorization_Token');
          
@@ -34,8 +35,7 @@ class Administrativo extends REST_Controller
         $_POST = $this->security->xss_clean($_POST);
         $ultimo_ID=$this->Model_Administrativo->save_data(
             $_POST["Nombre"],
-            $_POST["ApellidoPaterno"],
-            $_POST["ApellidoMaterno"],
+            $_POST["Apellidos"],
             $_POST["FechaNacimiento"],
             $_POST["Edad"],
             $_POST["Sexo"],
@@ -44,9 +44,10 @@ class Administrativo extends REST_Controller
             $_POST["Telefono"],
             $_POST["Movil"],
             $_POST["Email"],
+            $_POST["Unidad_Medica"],
             $_POST["Departamento"],
             $_POST["Funciones"],
-            $_POST["HorarioTrabajo"]
+            $_POST["Horario"]
         );
 
         //funcion para generar un usuarios y una clave;
@@ -73,8 +74,7 @@ class Administrativo extends REST_Controller
         $this->Model_Administrativo->update_data(
             $_POST["IDAdministrativo"],
             $_POST["Nombre"],
-            $_POST["ApellidoPaterno"],
-            $_POST["ApellidoMaterno"],
+            $_POST["Apellidos"],
             $_POST["FechaNacimiento"],
             $_POST["Edad"],
             $_POST["Sexo"],
@@ -86,13 +86,13 @@ class Administrativo extends REST_Controller
             $_POST["Unidad_Medica"],
             $_POST["Departamento"],
             $_POST["Funciones"],
-            $_POST["HorarioTrabajo"]
+            $_POST["Horario"]
         );
 
           // Success 200 Code Send
             $message = [
                 'status' => true,
-                'data'=>$_ID
+                'data'=>$_POST
             ];
             $this->response($message, REST_Controller::HTTP_OK);
      }
@@ -137,12 +137,26 @@ class Administrativo extends REST_Controller
             ];
             $this->response($message, REST_Controller::HTTP_OK);
      }
+      public function baja_post(){
+          $_POST = json_decode(file_get_contents("php://input"), true);
+          $_POST = $this->security->xss_clean($_POST);
+          $_Data=$this->Model_Administrativo->update_status(
+              $_POST["IDAdministrativo"],
+              $_POST["Status"]
+          );
+          // Success 200 Code Send
+            $message = [
+                'status' => true,
+                'data'=>$_Data
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+     }
     
     public function changefoto_post(){
         $datos=$this->post();
        	if(count($_FILES)!==0){
 				$_Imagen=$_FILES["logo"]["name"];	
-				$ruta='./assets/img/fotosadministrativos/';
+				$ruta='./assets/img/fotosadministrativo/';
 				$rutatemporal=$_FILES["logo"]["tmp_name"];
 				$nombreactual=$_FILES["logo"]["name"];
 				try {
@@ -154,7 +168,7 @@ class Administrativo extends REST_Controller
 						$this->response($message, REST_Controller::HTTP_NOT_FOUND);
 					}	
                     // Success 200 Code Send
-                    $this->Model_Paciente->update_foto($datos["IDAdministrativo"],$nombreactual);
+                    $this->Model_Administrativo->update_foto($datos["IDAdministrativo"],$nombreactual);
                     $message = [
                         'status' => true,
                         'message' => "Exito",
