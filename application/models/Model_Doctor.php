@@ -193,7 +193,7 @@ class Model_Doctor extends CI_Model
 				array_push($_Resultados,array("IDDatos_Doc"=>$empresa["IDDatos_Doc"]));
 			}			
 		}
-       $_Datos=[];
+        $_Datos=[];
         foreach($_Resultados as $_Doctor){
 		    $_DatosDoctor=$this->getdata($_Doctor["IDDatos_Doc"]);
             array_push($_Datos,array(

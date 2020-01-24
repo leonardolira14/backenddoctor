@@ -39,4 +39,12 @@ $route['searchadministrativo']="administrativo/busqueda";
 $route['updatefotoadministrativo']= 'administrativo/changefoto';
 $route['bajaadministrativo']="administrativo/baja";
 
+$route['saveasistente']="asistentemedico/save";
+$route['updateasistente']="asistentemedico/update";
+$route['getdataasistente']="asistentemedico/getdata";
+$route['getallasistente']="asistentemedico/getall";
+$route['searchasistente']="asistentemedico/buscar";
+$route['updatefotoasistente']= 'asistentemedico/changefoto';
+$route['bajaasistente']="asistentemedico/baja";
+
 $route['pruebatoke'] = 'api/users/prueba';
