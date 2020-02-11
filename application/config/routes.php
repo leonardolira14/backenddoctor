@@ -47,4 +47,6 @@ $route['searchasistente']="asistentemedico/buscar";
 $route['updatefotoasistente']= 'asistentemedico/changefoto';
 $route['bajaasistente']="asistentemedico/baja";
 
+$route['savecita']="citas/save";
+$route['getcitasdate']="citas/getcitasdate";
 $route['pruebatoke'] = 'api/users/prueba';
