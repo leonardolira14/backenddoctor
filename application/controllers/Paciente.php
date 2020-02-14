@@ -305,5 +305,45 @@ class Paciente extends REST_Controller
 		$this->response($message, REST_Controller::HTTP_OK);
     }
 
+    //funcion para actuazalizar los antecedentes de un paciente
+    public function updateantecedentes_post(){
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos=$this->post();
+        $_data=$this->Model_Paciente->update_antecedentes($datos["idpaciente"],$datos["antecedentes"]);
+       if($_data){
+            $message = [
+                        'status' => true,
+                        'message' => "Exito",
+                        'data'=>$datos
+
+                    ];
+		$this->response($message, REST_Controller::HTTP_OK);
+       }else{
+            $message = [
+                        'status' => false,
+                        'message' => "Error",
+                        'data'=>$datos
+
+                    ];
+		$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+       }
+    }
+
+    public function getantecedentes_post(){
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos=$this->post();
+        $_data=$this->Model_Paciente->get_antecedentes($datos["idpaciente"]);
+        $message = [
+                        'status' => true,
+                        'message' => "Exito",
+                        'data'=>$_data
+
+                    ];
+		$this->response($message, REST_Controller::HTTP_OK);
+       
+    }
+
     
 }

@@ -14,6 +14,9 @@ $route['getlispacientes']= 'paciente/getall';
 $route['getdatapacientes']= 'paciente/getdata';
 $route['updatestatus']='paciente/updatestatus';
 $route['busquedapaciente']='paciente/busqueda';
+$route['updateantecedentespaciente']="paciente/updateantecedentes";
+$route['getantecedentespaciente']="paciente/getantecedentes";
+
 
 $route['savedatadoctor']='doctor/savedata';
 $route['updatefotodoctor']= 'doctor/changefoto';
@@ -49,4 +52,7 @@ $route['bajaasistente']="asistentemedico/baja";
 
 $route['savecita']="citas/save";
 $route['getcitasdate']="citas/getcitasdate";
+
+
+
 $route['pruebatoke'] = 'api/users/prueba';

@@ -7,6 +7,8 @@ class Model_Paciente extends CI_Model
     protected $datos_emergencia_table = 'emergencia_datos_paciente';
     protected $direcciones_table = 'direcciones_paciente';
     protected $discapacidad_table = 'discapacidad_paciente';
+    protected $antecedentes_table = 'antecedentes';
+
 
     //funcion para guardar los datos de paciente
     public function save_data(
@@ -294,5 +296,26 @@ class Model_Paciente extends CI_Model
             ));			
         }
         return $_Datos;
+    }
+    // funcion para actualizar los antecedentes de un paciente
+    public function update_antecedentes($_ID_Paciente,$_Antecedentes){
+         
+        $respuesta=$this->db->select('*')->where("IDPaciente='$_ID_Paciente'")->get($this->antecedentes_table);
+        if( $respuesta->num_rows()===0){
+            $array=array("Texto"=>$_Antecedentes,"IDPaciente"=>$_ID_Paciente);
+            return $this->db->insert($this->antecedentes_table,$array);
+        }else{
+           $array=array("Texto"=>$_Antecedentes);
+        return $this->db->where("IDPaciente='$_ID_Paciente'")->update($this->antecedentes_table,$array);
+        }
+
+    }
+    public function get_antecedentes($_ID_Paciente){
+        $respuesta=$this->db->select('*')->where("IDPaciente='$_ID_Paciente'")->get($this->antecedentes_table);
+        if( $respuesta->num_rows()===0){
+            return false;
+        }else{
+            return $respuesta->row_array();
+        }
     }
 }
