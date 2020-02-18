@@ -168,7 +168,16 @@ class Model_Paciente extends CI_Model
         $_Discapacitado,
         $_Grupo_Sanguineo,
         $_Religion,
-        $_Ocupacion
+        $_Ocupacion,
+        $_Estado_Civil,
+        $_NodeControl,
+        $_Escolaridad,
+        $_Estructura_Familiar,
+        $_Egresos,
+        $_Vivienda,
+        $_Seguridad_Alimentacion,
+        $_Diagnostico_Social,
+        $_Bienes_Servicios
         ){
          $array=array(
              "Nombre"=>$_Nombre,
@@ -185,7 +194,16 @@ class Model_Paciente extends CI_Model
              "Discapacitado"=>$_Discapacitado,
              "Grupo_Sanguineo"=>$_Grupo_Sanguineo,
              "Religion"=>$_Religion,
-             "Ocupacion"=>$_Ocupacion
+             "Ocupacion"=>$_Ocupacion,
+             "Estado_Civil"=>$_Estado_Civil,
+             "NodeControl"=>$_NodeControl,
+            "Escolaridad"=>$_Escolaridad,
+            "Estructura_Familiar"=>$_Estructura_Familiar,
+            "Egresos"=>$_Egresos,
+            "Vivienda"=>$_Vivienda,
+            "Seguridad_Alimentacion"=>$_Seguridad_Alimentacion,
+            "Diagnostico_Social"=>$_Diagnostico_Social,
+            "Bienes_Servicios"=>$_Bienes_Servicios
          );
          return $this->db->where("IDPaciente='$_ID_Paciente'")->update($this->paciente_table,$array);
        
@@ -230,15 +248,27 @@ class Model_Paciente extends CI_Model
     }
 
     // funcion para actulizar la discapacidad de una persona
-    public function update_discapacidad($_ID_Paciente,$_Nombre,$_Apellido,$_Parentesco,$_Causa){
+    public function update_discapacidad($_ID=0,$_ID_Paciente,$_Nombre,$_Apellido,$_Parentesco,$_Causa,$_Sexo='',$_Edad='',$_Estado_Civil='',$_Escolaridad='',$_Ocupacion='',$_Telefono='',$_Domicilio=''){
         $array=array(
             "IDPaciente"=>$_ID_Paciente,
             "Nombre"=>$_Nombre,
             "Apellidos"=>$_Apellido,
             "Parentesco"=>$_Parentesco,
-            "Causa"=>$_Causa
+            "Causa"=>$_Causa,
+            "Sexo"=>$_Sexo,
+            "Edad"=>$_Edad,
+            "Estado_Civil"=>$_Estado_Civil,
+            "Escolaridad"=>$_Escolaridad,
+            "Ocupacion"=>$_Ocupacion,
+            "Telefono"=>$_Telefono,
+            "Domicilio"=>$_Domicilio
         );
-        return $this->db->insert($this->discapacidad_table,$array);
+        if($_ID===0){
+            return $this->db->insert($this->discapacidad_table,$array);
+        }else{
+            return $this->db->update($this->discapacidad_table,$array);
+        }
+        
     }
 
     //funcion para cambiar el status de un paciente 

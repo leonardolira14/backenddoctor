@@ -16,6 +16,7 @@ $route['updatestatus']='paciente/updatestatus';
 $route['busquedapaciente']='paciente/busqueda';
 $route['updateantecedentespaciente']="paciente/updateantecedentes";
 $route['getantecedentespaciente']="paciente/getantecedentes";
+$route['savesocioeconomicop']="paciente/savesocioeconomicop";
 
 
 $route['savedatadoctor']='doctor/savedata';

@@ -216,6 +216,7 @@ class Paciente extends REST_Controller
         // hora veo si es disapacitado o no
         if($_POST["Discapacidad"]==='1'){
            $output=$this->Model_Paciente->update_discapacidad(
+               0,
                $_POST["IDPaciente"],
                $_POST["Nombre_Discapacidad"],
                $_POST["Apellidos_Discapacidad"],
@@ -343,6 +344,74 @@ class Paciente extends REST_Controller
                     ];
 		$this->response($message, REST_Controller::HTTP_OK);
        
+    }
+
+     public function savesocioeconomicop_post(){
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos=$this->post();
+        
+
+        // actualizo datos de discapacidad
+           $output=$this->Model_Paciente->update_discapacidad(
+               $_POST["datos_discapacidad"]["IDDiscapacidad"],
+                $_POST["datos_paciente"]["IDPaciente"],
+                $_POST["datos_discapacidad"]["Nombre"],
+                $_POST["datos_discapacidad"]["Apellidos"],
+                $_POST["datos_discapacidad"]["Parentesco"],
+                $_POST["datos_discapacidad"]["Causa"],
+                $_POST["datos_discapacidad"]["Sexo"],
+                $_POST["datos_discapacidad"]["Edad"],
+                $_POST["datos_discapacidad"]["Estado_Civil"],
+                $_POST["datos_discapacidad"]["Escolaridad"],
+                $_POST["datos_discapacidad"]["Ocupacion"],
+                $_POST["datos_discapacidad"]["Telefono"],
+                 $_POST["datos_discapacidad"]["Domicilio"]
+            );
+        // ahora los datos de direccion
+
+        $output=$this->Model_Paciente->update_direccion(
+                $_POST["datos_paciente"]["IDPaciente"],
+                $_POST["direccion_paciente"]["Calle_Y_Numero"],
+                $_POST["direccion_paciente"]["Colonia"],
+                $_POST["direccion_paciente"]["Municipio"],
+                $_POST["direccion_paciente"]["Estado"],
+                $_POST["direccion_paciente"]["CP"]
+        );
+         $this->Model_Paciente->update_data(
+            $_POST["datos_paciente"]["IDPaciente"],
+          $_POST["datos_paciente"]["Nombre"],
+           $_POST["datos_paciente"]["Apellido_Mat"],
+            $_POST["datos_paciente"]["Apellido_Pat"],
+            $_POST["datos_paciente"]["Fecha_Nacimiento"],
+            $_POST["datos_paciente"]["Edad"],
+           $_POST["datos_paciente"]["Sexo"],
+           $_POST["datos_paciente"]["Curp"],
+            $_POST["datos_paciente"]["Email"],
+           $_POST["datos_paciente"]["NumExpedienteAnterior"],
+            $_POST["datos_paciente"]["Telefono"],
+           $_POST["datos_paciente"]["Movil"],
+           $_POST["datos_paciente"]['Discapacitado'],
+           $_POST["datos_paciente"]["Grupo_Sanguineo"],
+           $_POST["datos_paciente"]["Religion"],
+           $_POST["datos_paciente"]["Ocupacion"],
+            $_POST["datos_paciente"]["Estado_Civil"],
+            $_POST["datos_paciente"]["NodeControl"],
+            $_POST["datos_paciente"]["Escolaridad"],
+            $_POST["datos_paciente"]["Estructura_Familiar"],
+            $_POST["datos_paciente"]["Egresos"],
+            $_POST["datos_paciente"]["Vivienda"],
+            $_POST["datos_paciente"]["Seguridad_Alimentacion"],
+            $_POST["datos_paciente"]["Diagnostico_Social"],
+            $_POST["datos_paciente"]["Bienes_Servicios"]
+        );
+            $message = [
+                        'status' => true,
+                        'message' => "Exito",
+                        'data'=>$datos
+
+                    ];
+		$this->response($message, REST_Controller::HTTP_OK);
     }
 
     
