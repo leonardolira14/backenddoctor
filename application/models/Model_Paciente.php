@@ -8,6 +8,7 @@ class Model_Paciente extends CI_Model
     protected $direcciones_table = 'direcciones_paciente';
     protected $discapacidad_table = 'discapacidad_paciente';
     protected $antecedentes_table = 'antecedentes';
+    protected $medicamento_table = 'medicamento_paciente';
 
 
     //funcion para guardar los datos de paciente
@@ -347,5 +348,11 @@ class Model_Paciente extends CI_Model
         }else{
             return $respuesta->row_array();
         }
+    }
+
+    // funciones para obtener los medicamentos de un paciente
+    public function getmedicamento($_Status,$_IDPaciente){
+        $respuesta=$this->db->select('*')->where("IDPaciente='$_IDPaciente' and  Status='$_Status'")->get($this->medicamento_table);
+        return $respuesta->result_array();
     }
 }

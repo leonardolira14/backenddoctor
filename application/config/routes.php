@@ -54,6 +54,6 @@ $route['bajaasistente']="asistentemedico/baja";
 $route['savecita']="citas/save";
 $route['getcitasdate']="citas/getcitasdate";
 
-
+$route['medicamento/getlist']="paciente/getlistmedicamento";
 
 $route['pruebatoke'] = 'api/users/prueba';

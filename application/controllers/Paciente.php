@@ -413,6 +413,20 @@ class Paciente extends REST_Controller
                     ];
 		$this->response($message, REST_Controller::HTTP_OK);
     }
+    // funcion para traer el medicamento 
+    public function getlistmedicamento_post(){
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos=$this->post();
+        $data['activos']=$this->Model_Paciente->getmedicamento('1',$datos['IDPaciente']);
+        $data['desactivados']=$this->Model_Paciente->getmedicamento('0',$datos['IDPaciente']);
+        $message = [
+                        'status' => true,
+                        'message' => "Exito",
+                        'data'=>$data
 
+                    ];
+		$this->response($message, REST_Controller::HTTP_OK);
+    }
     
 }
