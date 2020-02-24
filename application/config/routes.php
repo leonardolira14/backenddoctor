@@ -55,5 +55,8 @@ $route['savecita']="citas/save";
 $route['getcitasdate']="citas/getcitasdate";
 
 $route['medicamento/getlist']="paciente/getlistmedicamento";
+$route['medicamento/add']='paciente/addmedicamento';
+$route['medicamento/update'] = 'paciente/updatemedicamento';
+$route['medicamento/update/status'] = 'paciente/updatestatusmedicamento';
 
 $route['pruebatoke'] = 'api/users/prueba';

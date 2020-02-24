@@ -428,5 +428,78 @@ class Paciente extends REST_Controller
                     ];
 		$this->response($message, REST_Controller::HTTP_OK);
     }
+
+    public function addmedicamento_post(){
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos=$this->post();
+        $respuesta=$this->Model_Paciente->save_medicamento($datos['Nombre'],$datos['Control'],$datos["IDPaciente"]);
+        if($respuesta){
+            $message = [
+                'status' => true,
+                'message' => "Exito",
+                'data' =>  $datos
+
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        }else{
+            $message = [
+                'status' => false,
+                'message' => "Error",
+                'data' => $datos
+
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_ACCEPTABLE);
+        }
+        
+    }
+    public function updatemedicamento_post()
+    {
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos = $this->post();
+        $respuesta = $this->Model_Paciente->update_medicamento($datos['Nombre'], $datos['Control'], $datos["IDMedicamento"]);
+        if ($respuesta) {
+            $message = [
+                'status' => true,
+                'message' => "Exito",
+                'data' =>  $datos
+
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Error",
+                'data' => $datos
+
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_ACCEPTABLE);
+        }
+    }
+    public function updatestatusmedicamento_post()
+    {
+        $_POST = json_decode(file_get_contents("php://input"), true);
+        $_POST = $this->security->xss_clean($_POST);
+        $datos = $this->post();
+        $respuesta = $this->Model_Paciente->update_status_medicamento( $datos["IDMedicamento"], $datos["Status"]);
+        if ($respuesta) {
+            $message = [
+                'status' => true,
+                'message' => "Exito",
+                'data' =>  $datos
+
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Error",
+                'data' => $datos
+
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_ACCEPTABLE);
+        }
+    }
     
 }

@@ -355,4 +355,35 @@ class Model_Paciente extends CI_Model
         $respuesta=$this->db->select('*')->where("IDPaciente='$_IDPaciente' and  Status='$_Status'")->get($this->medicamento_table);
         return $respuesta->result_array();
     }
+
+    //funcion para agregar medicamentop
+    public function save_medicamento($_Nombre,$_Trataminto,$_IDPaciente){
+        $array=array(
+            "Nombre"=>$_Nombre,
+            "IDPaciente"=>$_IDPaciente,
+            "Fecha_Registro"=>date('d/m/Y'),
+            "Fecha_Baja"=>'',
+            "Control"=>$_Trataminto
+        );
+        return $this->db->insert($this->medicamento_table,$array);
+    }
+    //funcion para actualizar medicamentop
+    public function update_medicamento($_Nombre, $_Trataminto, $_IDMedicamento)
+    {
+        $array = array(
+            "Nombre" => $_Nombre,
+            "Control" => $_Trataminto
+        );
+        return $this->db->where("IDMedicamento='$_IDMedicamento'")->update($this->medicamento_table, $array);
+    }
+    //funcion para actualizar medicamentop
+    public function update_status_medicamento($_IDMedicamento,$_Status)
+    {
+        ($_Status==='1')?$_Status='0':$_Status='1';
+        $array = array(
+            "Status" => $_Status,
+            "Fecha_Baja"=>date('d/m/Y')
+        );
+        return $this->db->where("IDMedicamento='$_IDMedicamento'")->update($this->medicamento_table, $array);
+    }
 }
