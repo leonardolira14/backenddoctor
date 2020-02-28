@@ -174,7 +174,7 @@ class Users extends REST_Controller
             }
         }
     }
-
+    
     public function prueba_get(){
         print_r($this->authorization_token->userData());
         exit();
